@@ -1,0 +1,26 @@
+-------------
+Example Files
+-------------
+
+MPASM assembler/MPLINK linker example:
+ Create a project with both files
+ - example.asm
+ - example2.asm
+
+MPASM Initialized Data Startup File:
+ Choose one depending on your device
+ - idasm16.asm
+ - idasm17.asm
+
+8x8 Software Multiplier for 16Cxxx Family:
+ Absolute Code
+ - sample.asm
+ Relocatable Code 
+ - sampobj.asm
+ - mult8x8.asm
+
+Configure the A/D Module
+ - tut452.asm
+
+Basic example file
+ - tutor.asm

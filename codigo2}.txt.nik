@@ -1,0 +1,13 @@
+declara { 
+
+a # verdadero
+b = 3  
+penesito : pen1
+
+}
+
+bucle { 
+
+entrada (a,penesito)
+
+}

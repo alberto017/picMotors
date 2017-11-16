@@ -1,0 +1,893 @@
+package lex;
+import java_cup.runtime.*;
+import java.io.FileReader;
+import java.util.Hashtable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.Stack;
+import javax.swing.JOptionPane;
+
+init with{:
+    vars = 0;
+    :}
+
+parser code {:
+
+    Hashtable<String, Lexema> tabla = new Hashtable<>();
+    int contadorTemporales = 0;
+    int direccionDeMemoria = 20; 
+    int ifs = 0;
+    int elses=0;
+    int whiles = 0;
+    int repeats = 0;
+    int a=0,n=0;
+    String id_sal="",id_ent="";
+    Stack caso = new Stack();
+
+    public static int vars;
+    StringBuilder m = new StringBuilder("");
+    public void report_error(String a,String message, int left, int right) {
+    message="Error de Sintaxis";
+        compilador.setError("Se esperaba "+message+" Linea "+(left)+" Columna: "+(right));
+        
+    }
+
+    public void report_error(String message, int left, int right) {
+//        StringBuilder m = new StringBuilder("Error sintáctico ");       
+        message="Error de Sintaxis";
+        compilador.setError(message+". Linea: "+(left+1)+" ; Columna: "+(right+1)+" ;");
+        System.err.println(m);
+
+    }
+
+    public void report_error(String message) {
+//        StringBuilder m = new StringBuilder("Error sintáctico ");
+        message="Error de Sintaxis";
+        compilador.setError(message);
+        System.err.println(m);
+
+    }
+    public String newTemporal3(String a){
+            String resultado;
+
+            contadorTemporales++;
+            compilador.tres("t" + contadorTemporales + " = " + a );
+            resultado = "t" + contadorTemporales;
+
+        return resultado;
+            
+    }
+
+    public String newTemporal2(Lexema a, Lexema b){
+             String resultado;
+           compilador.tres(a.lexema + " = " + b.tres);
+             resultado = "t" + contadorTemporales;
+           
+           return resultado;
+            
+    }
+
+    public String newTemporal(Lexema a, Lexema op, Lexema b){
+        String resultado;
+            contadorTemporales++;
+            compilador.tres("t" + contadorTemporales + " =  "+op.lexema+" "+a.tres+","+b.tres);
+            resultado = "t" + contadorTemporales;
+
+        return resultado;
+    }
+
+     public String newTemporal1(Object a, Object op, Object b){
+        String resultado;
+
+            System.out.println(a);
+            System.out.println(op);
+            System.out.println(b);
+            contadorTemporales++;
+            compilador.tres("t" + contadorTemporales +" = "+a+" "+op+" "+b);
+            resultado = "t" + contadorTemporales;
+
+        return resultado;
+    }
+
+    public String agregarVariableObj(Lexema a, Lexema b,Lexema c){
+                String resultado="";
+           //compilador.addCodigoObjeto(a.lexema + " = " + b.tres);
+           //  resultado = "t" + contadorTemporales;
+           //System.err.println("A:"+a.lexema+"|B:"+b.lexema+"|C:"+c.lexema+"|");  
+           if(c.lexema.equals("#")){
+               if(b.lexema.equals("verdadero")){
+                   resultado="\n    " +a.lexema+" EQU "+direccionDeMemoria+"H"+"\n    " +"MOVLW D'1' "+"\n    " +"MOVWF "+a.lexema+"\n    "+"CLRW";
+               }else{
+                   resultado="\n    "+a.lexema+" EQU "+direccionDeMemoria+"H"+"\n    "+"MOVLW D'0' "+"\n    "+"MOVWF "+a.lexema+"\n    "+"CLRW";
+               }  
+           }
+           else{
+               if(c.lexema.equals("=")){
+                   resultado="\n    "+a.lexema+" EQU "+direccionDeMemoria+"H"+"\n    "+"MOVLW D'"+b.lexema+"' "+"\n    "+"MOVWF "+a.lexema+"\n    "+"CLRW";
+               }
+               else{
+                   if(c.lexema.equals(":")){
+                        //System.err.println("A: "+a.lexema+" B: "+b.lexema+" C: "+c.lexema+" Corta:"+b.lexema.substring(2, 3));  
+                        if (b.lexema.substring(2, 3).equals("a")) {
+                            resultado="\n    "+"#DEFINE "+a.lexema+" PORTB"+","+b.lexema.substring(3, 4);
+                        }
+                        else{
+                            resultado="\n    "+"#DEFINE "+a.lexema+" PORTA"+","+b.lexema.substring(3, 4);
+                        }
+                   }
+                   
+               }               
+           }
+           //System.err.println("A: "+a.lexema+" B: "+b.lexema+" C: "+c.lexema+"|");  
+           compilador.addCodigoObjeto(resultado);
+           
+           return resultado;
+
+    }
+
+
+    public String agregarCodigoObjeto(String EstCodigo){
+            compilador.addCodigoObjeto(EstCodigo);     
+            return EstCodigo;
+    }
+
+    public void report_error(String message, Object info) {
+        if (info instanceof java_cup.runtime.Symbol){
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+            m=new StringBuilder(message +" : ");
+            if (s.left >= 0) {m.append(" Linea: "+(s.left+1));
+                if (s.right >= 0)m.append(" Columna: "+(s.right+1));}}
+            if(m.length()!=0)
+                compilador.setError(m+"");
+    }
+    public static void main(String[] args){
+        try {
+                Cup sintactico = new Cup(new Lexer(new FileReader(args[0])));
+try{
+                Object result = sintactico.parse().value;}catch(Exception ex){
+
+
+}
+            System.out.println("\n*** Resultados finales ***");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+:};
+
+
+terminal Lexema  
+
+DECLARA,BUCLE,LLAVEIZQ,LLAVEDER,VERDADERO,FALSO, PENTRADA,PSALIDA,
+ENTRADA,ED,EF,CICLO,COMPARA,MOTORELECT,SAR,CAR,DETENER,SERVO,RETARDO,
+CONTADOR,FINAL,INICIO,TIEMPO,ALTO,
+
+
+CAD,CARACTER ,BOLEANO,VARIABLE,PUNTOYCOMA,MAYORIGUALQUE,MENORIGUALQUE,
+MENORQUE,MAYORQUE,IGUAL,DISTINTODE,COMA,
+Y,O,NEGACION,IF,THEN,ELSE,FOR,TO,DO,WHILE,PROCEDURE,
+PAREIZQ,PAREDER,DOSPUNTOS,SUMA,MULTIPLICACION,RESTA,
+DIVISION,INTEGERNUM,ID,CADENA,REPEAT,UNTIL,MOSTRARMENSAJE,PUNTO,
+SALIDA,ERROR,CASE,OF,READ,GATO,PROGRAMA,OR,AND,NOT,MODULO;
+
+//////////////////////////////////////////////////////
+
+non terminal  
+inicio, asignacion, asig, as_bol, as_dato , as_puerto , puerto ,cuerpo ,puertoentrada , puertosalida ,p_entrada ,p_salida 
+,sentencia ,s_ed ,s_ef,cond,cond_f,cond_s, s_edf, s_ciclo, exp,t,f,oprel,motorelec,oplog,srvo,retart,cont,as_asig,as_fvbol,cuerpo_if,cuerpo_else,alto;
+
+
+
+//#################################################################################################################################################################################################
+//########################################################################## ESTRUCTURA DE PROGRAMA ###############################################################################################
+//#################################################################################################################################################################################################
+
+inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
+|error:e DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {:compilador.setError("Error Sintactico: el documento esta vacio no hay nada para compilar");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ  LLAVEDER {: :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER 
+
+// ERRORES DE INICIO
+|DECLARA LLAVEIZQ  LLAVEDER BUCLE LLAVEIZQ:id cuerpo
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
+|DECLARA LLAVEIZQ LLAVEDER BUCLE cuerpo LLAVEDER:id 
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
+|DECLARA LLAVEIZQ:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico :, sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
+|DECLARA LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
+//////////////////////////////ERRORES DE INICIO CON ASIGNACION
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ:id cuerpo
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE cuerpo LLAVEDER:id 
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
+|DECLARA LLAVEIZQ:id asignacion BUCLE LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico : sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
+|DECLARA asignacion LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
+|DECLARA LLAVEIZQ LLAVEDER LLAVEDER BUCLE LLAVEIZQ LLAVEDER 
+{:compilador.setError("Error Sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER LLAVEDER BUCLE LLAVEIZQ LLAVEDER 
+{:compilador.setError("Error Sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER 
+{:compilador.setError("Error Sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
+|DECLARA LLAVEIZQ LLAVEDER  BUCLE LLAVEIZQ LLAVEDER LLAVEDER 
+{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER  BUCLE LLAVEIZQ LLAVEDER LLAVEDER
+{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER LLAVEDER 
+{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :};
+
+//#################################################################################################################################################################################################
+//############################################################################# ASIGNACIONES ######################################################################################################
+//#################################################################################################################################################################################################
+
+ 
+asignacion::= asig asignacion | asig {: parser.agregarCodigoObjeto("\nBUCLE\n"); :};
+asig::= as_bol | as_dato |as_puerto;
+//#################################################################################################################################################################################################
+//############################################################################# ASIGNACION BOLEANA  ###############################################################################################
+//#################################################################################################################################################################################################
+
+ 
+as_bol::= ID:id GATO:o VERDADERO:v 
+{:
+
+  if(!parser.tabla.containsKey(id.lexema)){
+    id.valor = "VERDADERO";            
+    id.tipo = "Boleano";
+    compilador.agregarid(id.lexema,id.tipo,id.valor);
+ 
+
+    id.tres = id.lexema;
+    v.tres= v.lexema;
+
+    parser.tabla.put(id.lexema,id);
+    parser.newTemporal2(id,v);
+
+    parser.direccionDeMemoria++;
+    parser.agregarVariableObj(id,v,o);
+    }        
+    else{
+        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+    }  
+:}
+| ID:id GATO:o FALSO:f
+{:
+  if(!parser.tabla.containsKey(id.lexema)){
+    id.valor = "FALSO";            
+    id.tipo = "Boleano";
+    compilador.agregarid(id.lexema,id.tipo,id.valor);          
+    parser.tabla.put(id.lexema,id);
+    id.tres = id.lexema;
+    f.tres= f.lexema;
+    parser.tabla.put(id.lexema,id);
+    parser.newTemporal2(id,f);
+
+    parser.direccionDeMemoria++;
+    parser.agregarVariableObj(id,f,o);
+    }        
+    else{
+        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+    }  
+:};
+//#################################################################################################################################################################################################
+//############################################################################# ASIGNACION NUMERICA ###############################################################################################
+//#################################################################################################################################################################################################
+
+
+as_dato::= ID:id IGUAL:o INTEGERNUM:valor {:
+  if(!parser.tabla.containsKey(id.lexema)){
+    id.valor = ""+valor;            
+    id.tipo = "entero";
+    RESULT = valor;
+    compilador.agregarid(id.lexema,id.tipo,id.valor);       
+    parser.tabla.put(id.lexema,id);
+
+    id.tres = id.lexema;
+    valor.tres= valor.lexema;
+    parser.tabla.put(id.lexema,id);
+    parser.newTemporal2(id,valor);
+
+    parser.direccionDeMemoria++;
+    parser.agregarVariableObj(id,valor,o);
+    //codigo gen cod
+  }
+    else{
+        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+    }  
+:};
+//#################################################################################################################################################################################################
+//########################################################################## Asignacion en codigo de bucle Operaciones ETC ########################################################################
+//#################################################################################################################################################################################################
+
+
+
+as_asig::= ID:id IGUAL:ig exp:e{:
+
+ if(!parser.tabla.containsKey(id.lexema)){
+                  
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
+
+                }
+    if(parser.tabla.containsKey(id.lexema)){
+                  
+       String tmp = compilador.Buscar(id.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("entero")){
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
+
+                }
+    }        
+
+
+        compilador.tres(id.lexema+" "+ig.lexema+" "+e);
+
+
+
+
+
+    :};
+
+
+as_fvbol::= ID:id IGUAL:ig VERDADERO:v
+{:          
+        parser.agregarCodigoObjeto("    BSF "+id.lexema+",0\n");
+         if(!parser.tabla.containsKey(id.lexema)){
+                  
+       
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
+
+                }
+    if(parser.tabla.containsKey(id.lexema)){
+                  
+       String tmp = compilador.Buscar(id.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
+
+                }
+    }        
+
+   compilador.tres(id.lexema+" "+ig.lexema+" "+v.lexema);
+
+
+    :}
+
+|ID:i IGUAL:g FALSO:f
+{:  parser.agregarCodigoObjeto("    BCF "+i.lexema+",0\n");
+     if(!parser.tabla.containsKey(i.lexema)){
+                  
+       
+
+                     compilador.setError("Error Semantico: La Variable <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No existe necesita ser declarada");
+
+                }
+    if(parser.tabla.containsKey(i.lexema)){
+                  
+       String tmp = compilador.Buscar(i.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No es de tipo Boleano");
+
+                }
+    }        
+
+    compilador.tres(i.lexema+" "+g.lexema+" "+f.lexema);
+    
+
+
+    :};
+
+//#################################################################################################################################################################################################
+//############################################################################ RENOMBRAR DE PUERTOS ###############################################################################################
+//#################################################################################################################################################################################################
+
+as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
+{:
+  if(!parser.tabla.containsKey(id.lexema)){
+        id.valor = ""+p;            
+        id.tipo = "pentrada";
+        
+        compilador.agregarid(id.lexema,id.tipo,id.valor);
+        //System.out.println(id.tipo+" el puerto: "+id.valor);            
+        parser.tabla.put(id.lexema,id);    
+    // generacion de codigo intermedio 
+    id.tres = id.lexema;
+    p.tres= p.lexema;
+    parser.tabla.put(id.lexema,id);
+    parser.newTemporal2(id,p);
+
+    parser.agregarVariableObj(id,p,o);
+    }        
+    else{
+        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+    }
+    if(!parser.tabla.containsKey(p.lexema)){
+        id.valor = ""+p;            
+        id.tipo = "pentrada";
+        compilador.agregarid(id.lexema,id.tipo,id.valor);
+        //System.out.println(id.tipo+" el puerto: "+id.valor);   
+        parser.tabla.put(p.lexema,id);      
+    }        
+    else{
+        compilador.setError("Error Semantico(Unidad); El puerto: <"+p.lexema+">. Que se encuentra renglon: "+(pleft+1)+" columna: "+(pright+1)+". Ya fue asignado anteriormente.");
+    }
+:}
+| ID:id DOSPUNTOS:o PSALIDA:p 
+{:
+  if(!parser.tabla.containsKey(id.lexema)){
+        id.valor = ""+p;            
+        id.tipo = "psalida";
+        compilador.agregarid(id.lexema,id.tipo,id.valor); 
+        //System.out.println(id.tipo+" el puerto: "+id.valor);            
+        parser.tabla.put(id.lexema,id);
+// generacion de codigo intermedio 
+    id.tres = id.lexema;
+    p.tres= p.lexema;
+    parser.tabla.put(id.lexema,id);
+    parser.newTemporal2(id,p);    
+
+    parser.agregarVariableObj(id,p,o);
+    }        
+    else{
+        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+    }
+    if(!parser.tabla.containsKey(p.lexema)){
+        id.valor = ""+p;            
+        id.tipo = "psalida";
+        compilador.agregarid(id.lexema,id.tipo,id.valor);
+        //System.out.println(id.tipo+" el puerto: "+id.valor);   
+        parser.tabla.put(p.lexema,id);      
+    }        
+    else{
+        compilador.setError("Error Semantico : El puerto: <"+p.lexema+">. Que se encuentra renglon: "+(pleft+1)+" columna: "+(pright+1)+". Ya fue asignado anteriormente.");
+    }
+:}
+|ID:id DOSPUNTOS ID:p
+{:compilador.setError("Error Semantico : el tipo <"+p.lexema+">. No existe  renglon: "+(pleft+1)+" columna: "+(pright+1)+"se espera un tipo puerto");:} 
+    
+
+
+;
+
+//#################################################################################################################################################################################################
+//########################################################################################## CUERPO ###############################################################################################
+//#################################################################################################################################################################################################
+
+
+
+
+cuerpo::= sentencia cuerpo | sentencia ; 
+sentencia ::= puertoentrada |puertosalida | s_ed |s_ef| s_ciclo |exp |motorelec | srvo | retart |cont| as_asig|as_fvbol|alto;
+//#################################################################################################################################################################################################
+//########################################################################## ASIGNACION DE PUERTOS E/S ############################################################################################
+//#################################################################################################################################################################################################
+
+alto::= ALTO PAREIZQ INTEGERNUM:i PAREDER {: parser.agregarCodigoObjeto("     MOVLW B'"+i.lexema+"'\n       MOVWF PORTB"); :};
+puertoentrada::= ENTRADA PAREIZQ ID:id COMA p_entrada:p PAREDER
+   {:  
+        parser.agregarCodigoObjeto("    BCF "+ id.lexema+",0\n"+"  BTFSC "+parser.id_ent+"\n"+"   BSF "+id.lexema+",0\n");
+    if(!parser.tabla.containsKey(id.lexema)){
+                  
+       
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
+
+                }
+    if(parser.tabla.containsKey(id.lexema)){
+                  
+       String tmp = compilador.Buscar(id.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
+
+                }
+    }        
+
+
+    id.tres = id.lexema;
+    parser.tabla.put(id.lexema,id);
+    
+    compilador.tres(id.lexema + " = " + p);
+
+    :}
+|ENTRADA:n PAREIZQ ID COMA p_entrada
+{:  
+    compilador.setError("Error Sintactico en la asginacion de puertos <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+" falta un parentesis ')' ");:};
+
+
+p_entrada::= PENTRADA:r 
+{:
+    parser.id_ent=""+r.lexema;
+    RESULT = r.lexema;:}
+|ID:n
+{:
+    parser.id_ent=""+n.lexema;
+if(parser.tabla.containsKey(n.lexema)){
+                  
+       String tmp = compilador.Buscar(n.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("pentrada")){
+
+                     compilador.setError("Error Semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo pentrada");
+
+                }
+    }        
+    else{
+        compilador.setError("Error Semantico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe o es un tipo incorrecto");
+    }
+
+                                //compilador.Mostrar(id.lexema);
+
+RESULT = n.lexema;
+:};
+
+puertosalida::= SALIDA:id PAREIZQ ID:k COMA p_salida:p PAREDER
+{:  
+    parser.agregarCodigoObjeto("   BTFSS "+k.lexema+",0\n" +
+"   BCF "+parser.id_sal+"\n" +
+"   BTFSC "+k.lexema+",0\n" +
+"   BSF "+parser.id_sal+"\n");
+    if(!parser.tabla.containsKey(k.lexema)){
+                  
+       
+
+                     compilador.setError("Error Semantico: La Variable <"+k.lexema+"> en el renglon: "+(kleft+1)+" columna: "+(kright+1)+". No existe necesita ser declarada");
+
+                }
+    if(parser.tabla.containsKey(k.lexema)){
+                  
+       String tmp = compilador.Buscar(k.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+k.lexema+"> en el renglon: "+(kleft+1)+" columna: "+(kright+1)+". No es de tipo Boleano");
+
+                }
+    }    
+    
+    id.tres = id.lexema;
+    parser.tabla.put(id.lexema,id);
+    
+    compilador.tres(id.lexema + " = " + p);
+
+    :}
+|SALIDA:n PAREIZQ ID COMA p_salida
+{:compilador.setError("Error Sintactico en la asginacion de puertos <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+" falta un parentesis ')' ");:};
+
+
+
+p_salida::= PSALIDA:r
+{: 
+    parser.id_sal=r.lexema;
+    RESULT = r.lexema;:}
+
+
+| ID:n
+{:
+    parser.id_sal=n.lexema;
+if(parser.tabla.containsKey(n.lexema)){
+                  
+       String tmp = compilador.Buscar(n.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("psalida")){
+
+                     compilador.setError("Error Semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo psalida");
+
+                }
+    }        
+    else{
+        compilador.setError("Error Semantico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe o es un tipo incorrecto");
+    }
+
+                                //compilador.Mostrar(id.lexema);
+RESULT = n.lexema;
+:};
+
+//#################################################################################################################################################################################################
+//########################################################################## ESTRUCTURA DE DECISION ###############################################################################################
+//#################################################################################################################################################################################################
+
+//estructuradesicion con EF
+s_ed::=ED:i PAREIZQ cond_s:a  PAREDER  LLAVEIZQ cuerpo LLAVEDER 
+{:
+parser.agregarCodigoObjeto("    SALIDA"+parser.ifs);
+
+parser.ifs++; parser.elses++; i.tres="ED"+parser.ifs+":"; compilador.tres(i.tres+"\n"+a+" = "+"falso GOTO "+"EF"+parser.elses);
+compilador.tres("EF"+parser.elses+":");
+:};
+
+    
+s_ef::=EF:i PAREIZQ cond_f:a  PAREDER  LLAVEIZQ cuerpo LLAVEDER 
+{: 
+parser.agregarCodigoObjeto("    SALIDA"+parser.ifs);
+parser.ifs++; parser.elses++; i.tres="EF"+parser.ifs+":"; compilador.tres(i.tres+"\n"+a+" = "+"falso GOTO "+"EF"+parser.elses);
+compilador.tres("EF"+parser.elses+":");
+:};
+//#################################################################################################################################################################################################
+//########################################################################## ESTRUCTURAS REPETITIVAS ##############################################################################################
+//#################################################################################################################################################################################################
+ 
+
+s_ciclo::= CICLO:ci PAREIZQ cond:co PAREDER LLAVEIZQ  {:
+        
+        ci.tres="\nciclo"+parser.whiles+":";
+        compilador.tres(ci.tres);
+            compilador.tres("SI "+co+" = falso GO TO "+"salida");
+
+    :}
+    cuerpo {:
+    
+    compilador.tres("GO TO ciclo"+parser.whiles);
+    compilador.tres("salida:");
+:}LLAVEDER {:parser.agregarCodigoObjeto("    GOTO C"+parser.whiles+"\n   FUERA"+parser.whiles+"\n"); parser.whiles++;:}
+/* ###################### ERRORES CONDICION ############################*/
+|CICLO PAREIZQ:id PAREDER LLAVEIZQ LLAVEDER
+{: compilador.setError("Error Sintactico: La sentencia ciclo no tiene condicion ni sentencias dentro de el  renglon: "+(idleft+1)+" columna: "+(idright)); :}
+|CICLO PAREIZQ:id PAREDER LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico: La sentencia ciclo no tiene condicion renglon: "+(idleft+1)+" columna: "+(idright)); :}
+|CICLO PAREIZQ cond PAREDER LLAVEIZQ  LLAVEDER
+|CICLO:id PAREDER LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico: La sentencia ciclo no esta completa se esperaba Ciclo (condicion){codigo} en Renglon"+(idleft+1)+" columna: "+(idright)); :}
+|CICLO:id PAREIZQ LLAVEIZQ cuerpo LLAVEDER
+{: compilador.setError("Error Sintactico: La sentencia ciclo no esta completa se esperaba Ciclo (condicion){codigo} en Renglon"+(idleft+1)+" columna: "+(idright)); :}
+|CICLO:id PAREDER LLAVEIZQ LLAVEDER
+{: compilador.setError("Error Sintactico: La sentencia ciclo no esta completa se esperaba Ciclo (condicion){codigo} en Renglon"+(idleft+1)+" columna: "+(idright)); :}
+|CICLO:id PAREIZQ LLAVEIZQ LLAVEDER
+{: compilador.setError("Error Sintactico: La sentencia ciclo no esta completa se esperaba Ciclo (condicion){codigo} en Renglon"+(idleft+1)+" columna: "+(idright)); :}
+
+;
+
+
+//#################################################################################################################################################################################################
+//########################################################################## Estructura de Condición ##############################################################################################
+//#################################################################################################################################################################################################
+
+cond::= exp:a oprel:op exp:y 
+
+{:          
+
+        Object b;
+        b= parser.newTemporal1(a,op,y);
+        RESULT=b;
+
+
+
+    :}
+| exp IGUAL:ig exp 
+{:compilador.setError ("Error Sintactico: El operador IGUAL '=' no es un operador de comparacion pruebe con: '=='en Reglon:  "+(igleft+1));:}
+
+/* ##############33 ERRORES de Condicion ##################*/
+
+
+|oprel exp:id
+{: compilador.setError("Error Sintactico: La condicion le falta un operando o expresion en Reglon:  "+(idleft+1)); :}
+|exp:id exp
+{: compilador.setError("Error Sintactico: La condicion le falta el operador  en Reglon:  "+(idleft+1)+" columna: "+(idright)); :}
+|exp oprel:id 
+{: compilador.setError("Error Sintactico: La condicion le falta el operando o expresion en Reglon:  "+(idleft+1)+" columna: "+(idright+1)); :}
+//|dato:id 
+//{: compilador.setError("Error Sintactico: La condicion le faltan componentes en Renglon: "+(idleft+1)+" columna: "+(idright+1)); :}
+|oprel:id 
+{: compilador.setError("Error Sintactico: La condicion le faltan componentes en Renglon:  "+(idleft+1)+" columna: "+(idright+1)); :}
+| ID:id 
+{:
+    parser.agregarCodigoObjeto("    C"+parser.whiles+"\n    BTFSS "+id.lexema+",0"+"\n     GOTO FUERA"+parser.whiles+"\n");
+ 
+if(parser.tabla.containsKey(id.lexema)){
+                  
+       String tmp = compilador.Buscar(id.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
+
+                }
+    }        
+    else{
+        compilador.setError("Error Sintactico: La Variable <"+id.lexema+"> Que se encuentra en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe");
+    }
+//compilador.Mostrar(id.lexema);
+RESULT =id.lexema;
+
+:};
+
+cond_f::=ID:id 
+{:
+ parser.agregarCodigoObjeto("\n   BTFSC "+id.lexema+",0\n" +"   GOTO SALIDA"+parser.ifs+"\n");
+if(parser.tabla.containsKey(id.lexema)){
+                  
+       String tmp = compilador.Buscar(id.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
+
+                }
+    }        
+    else{
+        compilador.setError("Error Sintactico: La Variable <"+id.lexema+"> Que se encuentra en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe");
+    }
+//compilador.Mostrar(id.lexema);
+RESULT =id.lexema;
+
+:};
+
+cond_s::=ID:id 
+{:
+parser.agregarCodigoObjeto("\n   BTFSS "+id.lexema+",0\n" +"   GOTO SALIDA"+parser.ifs+"\n");
+if(parser.tabla.containsKey(id.lexema)){
+                  
+       String tmp = compilador.Buscar(id.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("Boleano")){
+
+                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
+
+                }
+    }        
+    else{
+        compilador.setError("Error Sintactico: La Variable <"+id.lexema+"> Que se encuentra en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe");
+    }
+//compilador.Mostrar(id.lexema);
+RESULT = ""+id.lexema;
+
+:};
+
+//#################################################################################################################################################################################################
+//########################################################################## Estructura Operadores logicos# #######################################################################################
+//#################################################################################################################################################################################################
+
+
+
+oplog ::= AND | OR | NOT ;
+//#################################################################################################################################################################################################
+//########################################################################## Estructuta Operadores Relacionales ###################################################################################
+//#################################################################################################################################################################################################
+
+
+
+oprel::= MENORQUE:me
+{:
+    me.tres=me.lexema;
+        RESULT = me.lexema;
+
+    :}
+
+| MAYORQUE:ma 
+
+{:
+    ma.tres=ma.lexema;
+        RESULT = ma.lexema;
+
+    :}
+
+
+| COMPARA:co
+
+
+{:
+    co.tres=co.lexema;
+        RESULT = co.lexema;
+
+    :};
+
+
+//#################################################################################################################################################################################################
+//########################################################################## Expresion ############################################################################################################
+//#################################################################################################################################################################################################
+
+
+exp::= exp:a SUMA:op t:b 
+//***********************************
+{:
+//a.tres=a.lexema;
+    a = parser.newTemporal1 (a,op.lexema,b);
+RESULT = a;
+    :}
+//*********************************
+
+| exp:r RESTA:g t:v
+//***********************************
+{:
+//r.tres=r.lexema;
+    r = parser.newTemporal1 (r,g.lexema,v);
+RESULT = r;
+    :}
+//*********************************
+
+|t:w
+{:
+//r.tres=r.lexema;
+RESULT = w;
+    :};
+
+
+t::=  t:q MULTIPLICACION:l f:h 
+
+//***********************************
+{:
+    q = parser.newTemporal1 (q,l.lexema,h);
+RESULT = q;
+    :}
+//*********************************
+
+
+
+|f:s
+
+//***********************************
+{:
+
+RESULT = s;
+    :};
+//********************************* 
+f::= INTEGERNUM:x 
+
+//***********************************
+{:
+x.tres=x.lexema;
+RESULT = x.lexema;
+    :}
+//*********************************
+| PAREIZQ exp:e PAREDER
+//***********************************
+{:
+
+RESULT = e;
+    :}
+//*********************************
+
+
+| ID:n
+{:
+if(parser.tabla.containsKey(n.lexema)){
+                  
+       String tmp = compilador.Buscar(n.lexema);
+                //JOptionPane.showMessageDialog(null,tmp);
+                if (!tmp.equals("entero")){
+
+                     compilador.setError("Error Semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo entero");
+
+                }
+    }        
+    else{
+        compilador.setError("Error Sintactico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe y/o no esta declarada");
+    }
+
+    n.tres=n.lexema;
+    RESULT=n.lexema;                                
+
+:};
+//#################################################################################################################################################################################################
+//########################################################################## MOTOR ELECTRICO ##############################################################################################
+//#################################################################################################################################################################################################
+
+
+
+
+
+srvo::= SERVO PAREIZQ INTEGERNUM PAREDER 
+|SERVO error:e {:compilador.setError("Error en sentencia servo  "+(eleft+1)+" columna: "+(eright+1)); :}
+;
+
+retart::= RETARDO PAREIZQ INTEGERNUM:n COMA TIEMPO:t PAREDER {: parser.agregarCodigoObjeto("  CALL Retardo_"+n.lexema+t.lexema);:}
+|RETARDO:e PAREIZQ INTEGERNUM 
+{:compilador.setError("Error en sentencia retardo falta un parentesis de cierre ')'  renglon "+(eleft+1)+" columna: "+(eright+1)); :}
+|RETARDO:e PAREIZQ PAREDER
+{:compilador.setError("Error en sentencia retardo falta el valor de el retardo  renglon "+(eleft+1)+" columna: "+(eright+1)); :}
+|RETARDO:e INTEGERNUM PAREDER
+{:compilador.setError("Error en sentencia retardo falta un parentesis de cierre '(' renglon "+(eleft+1)+" columna: "+(eright+1)); :};
+
+cont::= CONTADOR INICIO | CONTADOR FINAL 
+|CONTADOR:e
+{:compilador.setError("Error en sentencia <contador> , se esperaba final o inicio'(' renglon "+(eleft+1)+" columna: "+(eright+1)); :};
+
+motorelec::= MOTORELECT PAREIZQ SAR PAREDER|MOTORELECT PAREIZQ CAR PAREDER| MOTORELECT PAREIZQ DETENER PAREDER
+| MOTORELECT error:e {:compilador.setError("Error en sentencia <MOTORELECT> , se esperaba una estructura MOTORELECT ( SAR | CAR | DETENER) renglon "+(eleft+1)+" columna: "+(eright+1)); :};
