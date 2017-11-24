@@ -1,25 +1,12 @@
-delara {                                              		  //Segmento_de_codigo_exclusivo_para_declaraciones 
-	ledRojop # verdadero
-	ledVerdep # falso
-	ledRojo # falso
-	ledVerde # verdadero
-	ledAmarillo # falso
-	vboton # falso
-	boton :  pen7	
-	ojo : psa0
-	amarillo : psa1
-	verde : psa2
-	rojop : psa4
-	verdep : psa3	
-}
+declara {f}
 
-bucle {     
+bucle {      
 	alto(00010100)
 	entrada(vboton,boton)
 
 	ed(vboton){
 	ledRojop = falso
-	ledVerdep = falso
+	ledVerde = falso
 	salida(ledRojop,rojop)
 	salida(ledVerde,verde)
 	ledAmarillo = verdadero

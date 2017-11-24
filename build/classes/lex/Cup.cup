@@ -162,8 +162,7 @@ DECLARA,BUCLE,LLAVEIZQ,LLAVEDER,VERDADERO,FALSO, PENTRADA,PSALIDA,
 ENTRADA,ED,EF,CICLO,COMPARA,MOTORELECT,SAR,CAR,DETENER,SERVO,RETARDO,
 CONTADOR,FINAL,INICIO,TIEMPO,ALTO,
 
-
-CAD,CARACTER ,BOLEANO,VARIABLE,PUNTOYCOMA,MAYORIGUALQUE,MENORIGUALQUE,
+CAD,CARACTER,BOLEANO,VARIABLE,PUNTOYCOMA,MAYORIGUALQUE,MENORIGUALQUE,
 MENORQUE,MAYORQUE,IGUAL,DISTINTODE,COMA,
 Y,O,NEGACION,IF,THEN,ELSE,FOR,TO,DO,WHILE,PROCEDURE,
 PAREIZQ,PAREDER,DOSPUNTOS,SUMA,MULTIPLICACION,RESTA,
@@ -172,9 +171,13 @@ SALIDA,ERROR,CASE,OF,READ,GATO,PROGRAMA,OR,AND,NOT,MODULO;
 
 //////////////////////////////////////////////////////
 
-non terminal  
+non terminal 
+ 
 inicio, asignacion, asig, as_bol, as_dato , as_puerto , puerto ,cuerpo ,puertoentrada , puertosalida ,p_entrada ,p_salida 
-,sentencia ,s_ed ,s_ef,cond,cond_f,cond_s, s_edf, s_ciclo, exp,t,f,oprel,motorelec,oplog,srvo,retart,cont,as_asig,as_fvbol,cuerpo_if,cuerpo_else,alto;
+,sentencia ,s_ed ,s_ef,cond,cond_f,cond_s, s_edf, s_ciclo, exp,t,f,oprel,motorelec,oplog,srvo,retart,cont,as_asig,as_fvbol,
+cuerpo_if,cuerpo_else,alto,
+
+correcto;
 
 
 
@@ -183,9 +186,24 @@ inicio, asignacion, asig, as_bol, as_dato , as_puerto , puerto ,cuerpo ,puertoen
 //#################################################################################################################################################################################################
 
 inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
-|error:e DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {:compilador.setError("Error Sintactico: el documento esta vacio no hay nada para compilar");:}
+|error:e DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {:compilador.setError("Error Sintactico: El documento esta vacio no hay nada para compilar");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ  LLAVEDER {: :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER 
+
+// ERRORES EN DECLARA
+|ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
+|DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico: renglon: Estructura DECLARA vacia");:}
+|DECLARA LLAVEIZQ ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
+
 
 // ERRORES DE INICIO
 |DECLARA LLAVEIZQ  LLAVEDER BUCLE LLAVEIZQ:id cuerpo
@@ -196,6 +214,8 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 {: compilador.setError("Error Sintactico :, sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
 |DECLARA LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
 {: compilador.setError("Error Sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
+
+
 //////////////////////////////ERRORES DE INICIO CON ASIGNACION
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ:id cuerpo
 {: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
@@ -217,6 +237,7 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 {:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER LLAVEDER 
 {:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :};
+
 
 //#################################################################################################################################################################################################
 //############################################################################# ASIGNACIONES ######################################################################################################
