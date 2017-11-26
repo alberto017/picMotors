@@ -173,11 +173,10 @@ SALIDA,ERROR,CASE,OF,READ,GATO,PROGRAMA,OR,AND,NOT,MODULO;
 
 non terminal 
  
-inicio, asignacion, asig, as_bol, as_dato , as_puerto , puerto ,cuerpo ,puertoentrada , puertosalida ,p_entrada ,p_salida 
-,sentencia ,s_ed ,s_ef,cond,cond_f,cond_s, s_edf, s_ciclo, exp,t,f,oprel,motorelec,oplog,srvo,retart,cont,as_asig,as_fvbol,
-cuerpo_if,cuerpo_else,alto,
-
-correcto;
+inicio, asignacion, asig, as_bol, as_dato, as_puerto, puerto, cuerpo, puertoentrada, 
+puertosalida, p_entrada, p_salida, sentencia, s_ed, s_ef, cond, cond_f, cond_s, s_edf,
+s_ciclo, exp, t, f, oprel, motorelec, oplog, srvo, retart, cont, as_asig, as_fvbol,
+cuerpo_if, cuerpo_else, alto, correcto;
 
 
 
@@ -193,34 +192,88 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 // ERRORES EN DECLARA
 |ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+|ID ID ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. Sentencia DECLARA esta incompleta.");:}
+
 |ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID ID ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|ID ID ID ID ID ID ID ID ID ID:id DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+
 |DECLARA ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA ID ID ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+
 |DECLARA LLAVEIZQ ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
+|DECLARA LLAVEIZQ ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+
 |DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico: renglon: Estructura DECLARA vacia");:}
 |DECLARA LLAVEIZQ ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
 
 
-// ERRORES DE INICIO
-|DECLARA LLAVEIZQ  LLAVEDER BUCLE LLAVEIZQ:id cuerpo
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
-|DECLARA LLAVEIZQ LLAVEDER BUCLE cuerpo LLAVEDER:id 
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
+
+// ERRORES EN ESTRUCTURA GENERAL
 |DECLARA LLAVEIZQ:id BUCLE LLAVEIZQ cuerpo LLAVEDER
 {: compilador.setError("Error Sintactico :, sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
 |DECLARA LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
 {: compilador.setError("Error Sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
-
-
-//////////////////////////////ERRORES DE INICIO CON ASIGNACION
-|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ:id cuerpo
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
-|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE cuerpo LLAVEDER:id 
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
 |DECLARA LLAVEIZQ:id asignacion BUCLE LLAVEIZQ cuerpo LLAVEDER
 {: compilador.setError("Error Sintactico : sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
 |DECLARA asignacion LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
@@ -236,16 +289,24 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER  BUCLE LLAVEIZQ LLAVEDER LLAVEDER
 {:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER LLAVEDER 
-{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :};
+{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
+|DECLARA LLAVEIZQ  LLAVEDER BUCLE LLAVEIZQ:id cuerpo
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
+|DECLARA LLAVEIZQ LLAVEDER BUCLE cuerpo LLAVEDER:id 
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ:id cuerpo
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE cuerpo LLAVEDER:id 
+{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :};
 
 
 //#################################################################################################################################################################################################
 //############################################################################# ASIGNACIONES ######################################################################################################
 //#################################################################################################################################################################################################
-
  
 asignacion::= asig asignacion | asig {: parser.agregarCodigoObjeto("\nBUCLE\n"); :};
 asig::= as_bol | as_dato |as_puerto;
+
 //#################################################################################################################################################################################################
 //############################################################################# ASIGNACION BOLEANA  ###############################################################################################
 //#################################################################################################################################################################################################
