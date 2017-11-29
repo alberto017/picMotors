@@ -1,4 +1,4 @@
-declara {a s d                                              		  //Segmento_de_codigo_exclusivo_para_declaraciones 
+declara {                                              		  //Segmento_de_codigo_exclusivo_para_declaraciones 
 
 	ledRojop # verdadero
 	ledVerdep # falso

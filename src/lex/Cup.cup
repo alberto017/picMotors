@@ -253,6 +253,50 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 |DECLARA ID ID ID ID ID ID ID ID ID ID:id LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
 
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER 
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID:id  BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID ID ID:id  BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+
+//ESTRUCTURA BUCLE
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID ID ID ID ID ID:id
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+
+
 |DECLARA LLAVEIZQ ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
 |DECLARA LLAVEIZQ ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
@@ -261,13 +305,41 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
 |DECLARA LLAVEIZQ ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID ID ID ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
 
 |DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico: renglon: Estructura DECLARA vacia");:}
 |DECLARA LLAVEIZQ ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
-
-
+|DECLARA LLAVEIZQ ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
+|DECLARA LLAVEIZQ ID ID ID ID ID ID ID ID ID ID:id LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA.");:}
 
 // ERRORES EN ESTRUCTURA GENERAL
 |DECLARA LLAVEIZQ:id BUCLE LLAVEIZQ cuerpo LLAVEDER
@@ -305,7 +377,8 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 //#################################################################################################################################################################################################
  
 asignacion::= asig asignacion | asig {: parser.agregarCodigoObjeto("\nBUCLE\n"); :};
-asig::= as_bol | as_dato |as_puerto;
+asig::= as_bol | as_dato |as_puerto
+;
 
 //#################################################################################################################################################################################################
 //############################################################################# ASIGNACION BOLEANA  ###############################################################################################
@@ -319,7 +392,6 @@ as_bol::= ID:id GATO:o VERDADERO:v
     id.valor = "VERDADERO";            
     id.tipo = "Boleano";
     compilador.agregarid(id.lexema,id.tipo,id.valor);
- 
 
     id.tres = id.lexema;
     v.tres= v.lexema;
@@ -352,7 +424,14 @@ as_bol::= ID:id GATO:o VERDADERO:v
     else{
         compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }  
-:};
+:}
+| ID:id VERDADERO:v{:compilador.setError("Error sintactico: No se encontro # en el renglon: "+(idleft+1)+" columna: "+(idright+1));
+:}
+|ID:id FALSO:f{:compilador.setError("Error sintactico: No se encontro # en el renglon: "+(idleft+1)+" columna: "+(idright+1));
+:}
+|ID:id GATO:o{:compilador.setError("Error sintactico: No se encontro  valor BOOLEANO en el renglon: "+(idleft+1)+" columna: "+(idright+1));
+:}
+;
 //#################################################################################################################################################################################################
 //############################################################################# ASIGNACION NUMERICA ###############################################################################################
 //#################################################################################################################################################################################################
@@ -531,10 +610,8 @@ as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
     }
 :}
 |ID:id DOSPUNTOS ID:p
-{:compilador.setError("Error Semantico : el tipo <"+p.lexema+">. No existe  renglon: "+(pleft+1)+" columna: "+(pright+1)+"se espera un tipo puerto");:} 
-    
-
-
+{:compilador.setError("Error Semantico : el tipo <"+p.lexema+">. No existe  renglon: "+(pleft+1)+" columna: "+(pright+1)+"se espera un tipo puerto");
+:}
 ;
 
 //#################################################################################################################################################################################################
