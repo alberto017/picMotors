@@ -254,25 +254,46 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. La estructura debe empezar con DECLARA.");:}
 
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER 
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID:id  BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID ID:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID ID ID:id  BUCLE LLAVEIZQ cuerpo LLAVEDER
-{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE.");:}
+
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID:id LLAVEIZQ cuerpo LLAVEDER 
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID ID ID ID ID ID ID ID ID ID:id LLAVEIZQ cuerpo LLAVEDER
+{:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n.La estructura debe empezar con BUCLE. .");:}
+
+
 
 //ESTRUCTURA BUCLE
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID:id
@@ -295,7 +316,6 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER ID ID ID ID ID ID ID ID ID ID:id
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. .");:}
-
 
 |DECLARA LLAVEIZQ ID:id asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER
 {:compilador.setError("Error sintactico <"+id.lexema+">: renglon: "+(idleft+1)+" columna: "+(idright+1)+"\n. No corresponde a la estructura DECLARA");:}
@@ -343,33 +363,35 @@ inicio::= DECLARA LLAVEIZQ LLAVEDER BUCLE LLAVEIZQ LLAVEDER {: :}
 
 // ERRORES EN ESTRUCTURA GENERAL
 |DECLARA LLAVEIZQ:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{: compilador.setError("Error Sintactico :, sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
+{: compilador.setError("Error sintactico : sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
+|DECLARA LLAVEIZQ asignacion LLAVEDER ID:id LLAVEIZQ cuerpo LLAVEDER 
+{: compilador.setError("Error sintactico : La estructura debe empezar con BUCLE ' } ' "); :}
 |DECLARA LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{: compilador.setError("Error Sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
+{: compilador.setError("Error sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
 |DECLARA LLAVEIZQ:id asignacion BUCLE LLAVEIZQ cuerpo LLAVEDER
-{: compilador.setError("Error Sintactico : sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
+{: compilador.setError("Error sintactico : sentencia DECLARA hace falta la llave de cierre ' } ' "); :}
 |DECLARA asignacion LLAVEDER:id BUCLE LLAVEIZQ cuerpo LLAVEDER
-{: compilador.setError("Error Sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
+{: compilador.setError("Error sintactico : sentencia DECLARA  hace falta la llave de apertura ' { ' "); :}
 |DECLARA LLAVEIZQ LLAVEDER LLAVEDER BUCLE LLAVEIZQ LLAVEDER 
-{:compilador.setError("Error Sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
+{:compilador.setError("Error sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER LLAVEDER BUCLE LLAVEIZQ LLAVEDER 
-{:compilador.setError("Error Sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
+{:compilador.setError("Error sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER 
-{:compilador.setError("Error Sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
+{:compilador.setError("Error sintactico : sentencia DECLARA tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ LLAVEDER  BUCLE LLAVEIZQ LLAVEDER LLAVEDER 
-{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
+{:compilador.setError("Error sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER  BUCLE LLAVEIZQ LLAVEDER LLAVEDER
-{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
+{:compilador.setError("Error sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ cuerpo LLAVEDER LLAVEDER 
-{:compilador.setError("Error Sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
+{:compilador.setError("Error sintactico : sentencia BUCLE tiene llaves de mas "+"'}'"); :}
 |DECLARA LLAVEIZQ  LLAVEDER BUCLE LLAVEIZQ:id cuerpo
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
+{: compilador.setError("Error sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
 |DECLARA LLAVEIZQ LLAVEDER BUCLE cuerpo LLAVEDER:id 
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
+{: compilador.setError("Error sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE LLAVEIZQ:id cuerpo
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
+{: compilador.setError("Error sintactico : sentencia BUCLE hace falta la llave de cierre ' } ' "); :}
 |DECLARA LLAVEIZQ asignacion LLAVEDER BUCLE cuerpo LLAVEDER:id 
-{: compilador.setError("Error Sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :};
+{: compilador.setError("Error sintactico : sentencia BUCLE hace falta la llave de apertura ' { ' "); :};
 
 
 //#################################################################################################################################################################################################
@@ -403,7 +425,7 @@ as_bol::= ID:id GATO:o VERDADERO:v
     parser.agregarVariableObj(id,v,o);
     }        
     else{
-        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+        compilador.setError("Error semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }  
 :}
 | ID:id GATO:o FALSO:f
@@ -422,7 +444,7 @@ as_bol::= ID:id GATO:o VERDADERO:v
     parser.agregarVariableObj(id,f,o);
     }        
     else{
-        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+        compilador.setError("Error semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }  
 :}
 | ID:id VERDADERO:v{:compilador.setError("Error sintactico: No se encontro # en el renglon: "+(idleft+1)+" columna: "+(idright+1));
@@ -455,7 +477,7 @@ as_dato::= ID:id IGUAL:o INTEGERNUM:valor {:
     //codigo gen cod
   }
     else{
-        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+        compilador.setError("Error semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }  
 :};
 //#################################################################################################################################################################################################
@@ -468,7 +490,7 @@ as_asig::= ID:id IGUAL:ig exp:e{:
 
  if(!parser.tabla.containsKey(id.lexema)){
                   
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
 
                 }
     if(parser.tabla.containsKey(id.lexema)){
@@ -477,7 +499,7 @@ as_asig::= ID:id IGUAL:ig exp:e{:
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("entero")){
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
 
                 }
     }        
@@ -499,7 +521,7 @@ as_fvbol::= ID:id IGUAL:ig VERDADERO:v
                   
        
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
 
                 }
     if(parser.tabla.containsKey(id.lexema)){
@@ -508,7 +530,7 @@ as_fvbol::= ID:id IGUAL:ig VERDADERO:v
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
 
                 }
     }        
@@ -524,7 +546,7 @@ as_fvbol::= ID:id IGUAL:ig VERDADERO:v
                   
        
 
-                     compilador.setError("Error Semantico: La Variable <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No existe necesita ser declarada");
+                     compilador.setError("Error semantico: La Variable <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No existe necesita ser declarada");
 
                 }
     if(parser.tabla.containsKey(i.lexema)){
@@ -533,16 +555,21 @@ as_fvbol::= ID:id IGUAL:ig VERDADERO:v
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No es de tipo Boleano");
+                     compilador.setError("Error semantico: La Variable <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No es de tipo Boleano");
 
                 }
     }        
 
     compilador.tres(i.lexema+" "+g.lexema+" "+f.lexema);
     
-
-
-    :};
+    :}
+    |ID:i FALSO:f{: 
+    compilador.setError("Error semantico: No se encontro '='");
+    :}
+    |ID:i VERDADERO:v{:
+    compilador.setError("Error semantico: No se encontro '='");
+    :}
+    ;
 
 //#################################################################################################################################################################################################
 //############################################################################ RENOMBRAR DE PUERTOS ###############################################################################################
@@ -566,7 +593,7 @@ as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
     parser.agregarVariableObj(id,p,o);
     }        
     else{
-        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+        compilador.setError("Error semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }
     if(!parser.tabla.containsKey(p.lexema)){
         id.valor = ""+p;            
@@ -576,7 +603,7 @@ as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
         parser.tabla.put(p.lexema,id);      
     }        
     else{
-        compilador.setError("Error Semantico(Unidad); El puerto: <"+p.lexema+">. Que se encuentra renglon: "+(pleft+1)+" columna: "+(pright+1)+". Ya fue asignado anteriormente.");
+        compilador.setError("Error semantico(Unidad); El puerto: <"+p.lexema+">. Que se encuentra renglon: "+(pleft+1)+" columna: "+(pright+1)+". Ya fue asignado anteriormente.");
     }
 :}
 | ID:id DOSPUNTOS:o PSALIDA:p 
@@ -596,7 +623,7 @@ as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
     parser.agregarVariableObj(id,p,o);
     }        
     else{
-        compilador.setError("Error Semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
+        compilador.setError("Error semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }
     if(!parser.tabla.containsKey(p.lexema)){
         id.valor = ""+p;            
@@ -606,11 +633,17 @@ as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
         parser.tabla.put(p.lexema,id);      
     }        
     else{
-        compilador.setError("Error Semantico : El puerto: <"+p.lexema+">. Que se encuentra renglon: "+(pleft+1)+" columna: "+(pright+1)+". Ya fue asignado anteriormente.");
+        compilador.setError("Error semantico : El puerto: <"+p.lexema+">. Que se encuentra renglon: "+(pleft+1)+" columna: "+(pright+1)+". Ya fue asignado anteriormente.");
     }
 :}
-|ID:id DOSPUNTOS ID:p
-{:compilador.setError("Error Semantico : el tipo <"+p.lexema+">. No existe  renglon: "+(pleft+1)+" columna: "+(pright+1)+"se espera un tipo puerto");
+|ID:id DOSPUNTOS:o ID:p{:
+compilador.setError("Error semantico <"+p.lexema+">: La Variable no es de tipo PUERTO: renglon: "+(pleft+1)+" columna: "+(pright+1)+"");
+:}
+|ID:id PSALIDA:p{:
+compilador.setError("Error semantico <"+id.lexema+">: No se encontro ':'' : renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+:}
+|ID:id PENTRADA:p{:
+compilador.setError("Error semantico <"+id.lexema+">: No se encontro ':' : renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
 :}
 ;
 
@@ -635,7 +668,7 @@ puertoentrada::= ENTRADA PAREIZQ ID:id COMA p_entrada:p PAREDER
                   
        
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No existe necesita ser declarada");
 
                 }
     if(parser.tabla.containsKey(id.lexema)){
@@ -644,7 +677,7 @@ puertoentrada::= ENTRADA PAREIZQ ID:id COMA p_entrada:p PAREDER
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es de tipo Boleano");
 
                 }
     }        
@@ -674,12 +707,12 @@ if(parser.tabla.containsKey(n.lexema)){
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("pentrada")){
 
-                     compilador.setError("Error Semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo pentrada");
+                     compilador.setError("Error semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo pentrada");
 
                 }
     }        
     else{
-        compilador.setError("Error Semantico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe o es un tipo incorrecto");
+        compilador.setError("Error semantico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe o es un tipo incorrecto");
     }
 
                                 //compilador.Mostrar(id.lexema);
@@ -697,7 +730,7 @@ puertosalida::= SALIDA:id PAREIZQ ID:k COMA p_salida:p PAREDER
                   
        
 
-                     compilador.setError("Error Semantico: La Variable <"+k.lexema+"> en el renglon: "+(kleft+1)+" columna: "+(kright+1)+". No existe necesita ser declarada");
+                     compilador.setError("Error semantico: La Variable <"+k.lexema+"> en el renglon: "+(kleft+1)+" columna: "+(kright+1)+". No existe necesita ser declarada");
 
                 }
     if(parser.tabla.containsKey(k.lexema)){
@@ -706,7 +739,7 @@ puertosalida::= SALIDA:id PAREIZQ ID:k COMA p_salida:p PAREDER
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+k.lexema+"> en el renglon: "+(kleft+1)+" columna: "+(kright+1)+". No es de tipo Boleano");
+                     compilador.setError("Error semantico: La Variable <"+k.lexema+"> en el renglon: "+(kleft+1)+" columna: "+(kright+1)+". No es de tipo Boleano");
 
                 }
     }    
@@ -737,12 +770,12 @@ if(parser.tabla.containsKey(n.lexema)){
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("psalida")){
 
-                     compilador.setError("Error Semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo psalida");
+                     compilador.setError("Error semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo psalida");
 
                 }
     }        
     else{
-        compilador.setError("Error Semantico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe o es un tipo incorrecto");
+        compilador.setError("Error semantico: La Variable <"+n.lexema+"> Que se encuentra en renglon: "+(nleft+1)+" columna: "+(nright+1)+". No existe o es un tipo incorrecto");
     }
 
                                 //compilador.Mostrar(id.lexema);
@@ -845,7 +878,7 @@ if(parser.tabla.containsKey(id.lexema)){
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
 
                 }
     }        
@@ -866,7 +899,7 @@ if(parser.tabla.containsKey(id.lexema)){
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
 
                 }
     }        
@@ -887,7 +920,7 @@ if(parser.tabla.containsKey(id.lexema)){
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("Boleano")){
 
-                     compilador.setError("Error Semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
+                     compilador.setError("Error semantico: La Variable <"+id.lexema+"> en la condicion en renglon: "+(idleft+1)+" columna: "+(idright+1)+". No es tipo boleano o le falta una comparacion valida");
 
                 }
     }        
@@ -1012,7 +1045,7 @@ if(parser.tabla.containsKey(n.lexema)){
                 //JOptionPane.showMessageDialog(null,tmp);
                 if (!tmp.equals("entero")){
 
-                     compilador.setError("Error Semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo entero");
+                     compilador.setError("Error semantico: La Variable <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+". No es tipo entero");
 
                 }
     }        
