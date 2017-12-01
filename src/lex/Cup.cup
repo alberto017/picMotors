@@ -160,7 +160,7 @@ terminal Lexema
 
 DECLARA,BUCLE,LLAVEIZQ,LLAVEDER,VERDADERO,FALSO, PENTRADA,PSALIDA,
 ENTRADA,ED,EF,CICLO,COMPARA,MOTORELECT,SAR,CAR,DETENER,SERVO,RETARDO,
-CONTADOR,FINAL,INICIO,TIEMPO,ALTO,
+CONTADOR,FINAL,INICIO,TIEMPO,ALTO,ALTO1,
 
 CAD,CARACTER,BOLEANO,VARIABLE,PUNTOYCOMA,MAYORIGUALQUE,MENORIGUALQUE,
 MENORQUE,MAYORQUE,IGUAL,DISTINTODE,COMA,
@@ -173,10 +173,10 @@ SALIDA,ERROR,CASE,OF,READ,GATO,PROGRAMA,OR,AND,NOT,MODULO;
 
 non terminal 
  
-inicio, asignacion, asig, as_bol, as_dato, as_puerto, puerto, cuerpo, puertoentrada, 
+inicio, asignacion, asig, as_bol, as_dato, as_puerto, puerto, cuerpo, puertoentrada, puertoentrada1, 
 puertosalida, p_entrada, p_salida, sentencia, s_ed, s_ef, cond, cond_f, cond_s, s_edf,
 s_ciclo, exp, t, f, oprel, motorelec, oplog, srvo, retart, cont, as_asig, as_fvbol,
-cuerpo_if, cuerpo_else, alto, correcto;
+cuerpo_if, cuerpo_else, alto,alto1, correcto;
 
 
 
@@ -447,13 +447,12 @@ as_bol::= ID:id GATO:o VERDADERO:v
         compilador.setError("Error semantico(Unidad); La variable: <"+id.lexema+">. Que se encuentra renglon: "+(idleft+1)+" columna: "+(idright+1)+". Ya fue declarada anteriormente.");
     }  
 :}
-| ID:id VERDADERO:v{:compilador.setError("Error sintactico: No se encontro # en el renglon: "+(idleft+1)+" columna: "+(idright+1));
+| ID:id VERDADERO:v{:compilador.setError("Error sintactico: No se encontro OPERANDO <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1));
 :}
-|ID:id FALSO:f{:compilador.setError("Error sintactico: No se encontro # en el renglon: "+(idleft+1)+" columna: "+(idright+1));
+|ID:id FALSO:f{:compilador.setError("Error sintactico: No se encontro OPERANDO <"+id.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1));
 :}
-|ID:id GATO:o{:compilador.setError("Error sintactico: No se encontro  valor BOOLEANO en el renglon: "+(idleft+1)+" columna: "+(idright+1));
-:}
-;
+|ID:id GATO:o{:compilador.setError("Error sintactico: No se encontro valor BOOLEANO <"+o.lexema+"> en el renglon: "+(idleft+1)+" columna: "+(idright+1));
+:};
 //#################################################################################################################################################################################################
 //############################################################################# ASIGNACION NUMERICA ###############################################################################################
 //#################################################################################################################################################################################################
@@ -564,10 +563,12 @@ as_fvbol::= ID:id IGUAL:ig VERDADERO:v
     
     :}
     |ID:i FALSO:f{: 
-    compilador.setError("Error semantico: No se encontro '='");
+    compilador.setError("Error sintactico: No se encontro OPERANDO <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No es de tipo Boleano");
+
     :}
     |ID:i VERDADERO:v{:
-    compilador.setError("Error semantico: No se encontro '='");
+    compilador.setError("Error sintactico: No se encontro OPERANDO <"+i.lexema+"> en el renglon: "+(ileft+1)+" columna: "+(iright+1)+". No es de tipo Boleano");
+
     :}
     ;
 
@@ -637,13 +638,13 @@ as_puerto::= ID:id DOSPUNTOS:o PENTRADA:p
     }
 :}
 |ID:id DOSPUNTOS:o ID:p{:
-compilador.setError("Error semantico <"+p.lexema+">: La Variable no es de tipo PUERTO: renglon: "+(pleft+1)+" columna: "+(pright+1)+"");
+compilador.setError("Error sintactico <"+p.lexema+">: La Variable no es de tipo PUERTO: renglon: "+(pleft+1)+" columna: "+(pright+1)+"");
 :}
 |ID:id PSALIDA:p{:
-compilador.setError("Error semantico <"+id.lexema+">: No se encontro ':'' : renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+compilador.setError("Error sintactico <"+id.lexema+">: No se encontro OPERANDO : renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
 :}
 |ID:id PENTRADA:p{:
-compilador.setError("Error semantico <"+id.lexema+">: No se encontro ':' : renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+compilador.setError("Error sintactico <"+id.lexema+">: No se encontro OPERANDO : renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
 :}
 ;
 
@@ -655,12 +656,23 @@ compilador.setError("Error semantico <"+id.lexema+">: No se encontro ':' : rengl
 
 
 cuerpo::= sentencia cuerpo | sentencia ; 
-sentencia ::= puertoentrada |puertosalida | s_ed |s_ef| s_ciclo |exp |motorelec | srvo | retart |cont| as_asig|as_fvbol|alto;
+sentencia ::= puertoentrada |puertosalida | s_ed |s_ef| s_ciclo |exp |motorelec | srvo | retart |cont| as_asig| as_fvbol| alto| alto1| puertoentrada1;
 //#################################################################################################################################################################################################
 //########################################################################## ASIGNACION DE PUERTOS E/S ############################################################################################
 //#################################################################################################################################################################################################
 
 alto::= ALTO PAREIZQ INTEGERNUM:i PAREDER {: parser.agregarCodigoObjeto("     MOVLW B'"+i.lexema+"'\n       MOVWF PORTB"); :};
+
+alto1::= ALTO PAREIZQ INTEGERNUM:i {: compilador.setError("Error sintactico <"+i.lexema+">: Sentencia ALTO hace falta la parentesis de cierre ' ) ' : renglon: "+(ileft+1)+" columna: "+(iright+1)+"");:}
+| ALTO INTEGERNUM:i PAREDER {:
+compilador.setError("Error sintactico <"+i.lexema+">: Sentencia ALTO hace falta la parentesis de apertura '(' : renglon: "+(ileft+1)+" columna: "+(iright+1)+"");:}
+| ALTO PAREIZQ PAREDER {:
+compilador.setError("Error sintactico: Sentencia ALTO hace falta el PARAMETRO de entrada");:}
+| ALTO PAREIZQ ID:id INTEGERNUM PAREDER {:
+compilador.setError("Error sintactico <"+id.lexema+">: No corresponde a la sentencia ALTO: renglon: "+(idleft+1)+" columna: "+(idright+1)+"");:}
+;
+
+
 puertoentrada::= ENTRADA PAREIZQ ID:id COMA p_entrada:p PAREDER
    {:  
         parser.agregarCodigoObjeto("    BCF "+ id.lexema+",0\n"+"  BTFSC "+parser.id_ent+"\n"+"   BSF "+id.lexema+",0\n");
@@ -691,8 +703,32 @@ puertoentrada::= ENTRADA PAREIZQ ID:id COMA p_entrada:p PAREDER
     :}
 |ENTRADA:n PAREIZQ ID COMA p_entrada
 {:  
-    compilador.setError("Error Sintactico en la asginacion de puertos <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+" falta un parentesis ')' ");:};
+    compilador.setError("Error sintactico en la asginacion de puertos <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+" falta un parentesis ')' ");
+:}
+;
 
+puertoentrada1::= ENTRADA PAREIZQ ID:id COMA PAREDER
+{:  
+compilador.setError("Error sintactico <"+id.lexema+">: Sentencia ENTRADA hace falta SEGUNDO parametro: renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+:}
+| ENTRADA PAREIZQ COMA p_entrada:p PAREDER
+{:  
+compilador.setError("Error sintactico: Sentencia ENTRADA hace falta PRIMER parametro: renglon: "+(pleft+1)+" columna: "+(pright+1)+"");
+:} 
+| ENTRADA:n PAREIZQ COMA PAREDER
+{:  
+compilador.setError("Error sintactico: Sentencia ENTRADA hace falta PRIMERO Y SEGUNDO parametro: renglon: "+(nleft+1)+" columna: "+(nright+1)+"");
+:}
+| ENTRADA:n ID:id COMA p_entrada:p PAREDER
+{:  
+compilador.setError("Error sintactico: Sentencia ENTRADA hace falta un PARENTESIS de apertura '(': renglon: "+(nleft+1)+" columna: "+(nright+1)+"");
+:} 
+| ENTRADA PAREIZQ ID ID:id COMA p_entrada:p PAREDER
+{:  
+compilador.setError("Error sintactico: No corresponde a la sentencia ENTRADA: renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+:}
+
+;
 
 p_entrada::= PENTRADA:r 
 {:
@@ -718,7 +754,8 @@ if(parser.tabla.containsKey(n.lexema)){
                                 //compilador.Mostrar(id.lexema);
 
 RESULT = n.lexema;
-:};
+:}
+;
 
 puertosalida::= SALIDA:id PAREIZQ ID:k COMA p_salida:p PAREDER
 {:  
