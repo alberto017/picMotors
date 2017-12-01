@@ -1409,6 +1409,9 @@ try {
     public static void setError(String error) {
         listaErrores.add(error);
     }
+    
+    public static void setTablaLexema(String error) {
+    }
 
     public static void setEstatica(String constante) {
         listaEstatica.add(constante);

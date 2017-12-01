@@ -788,7 +788,29 @@ puertosalida::= SALIDA:id PAREIZQ ID:k COMA p_salida:p PAREDER
 
     :}
 |SALIDA:n PAREIZQ ID COMA p_salida
-{:compilador.setError("Error Sintactico en la asginacion de puertos <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+" falta un parentesis ')' ");:};
+{:compilador.setError("Error Sintactico en la asginacion de puertos <"+n.lexema+"> en el renglon: "+(nleft+1)+" columna: "+(nright+1)+" falta un parentesis ')' ");:}
+|
+SALIDA PAREIZQ ID:id COMA PAREDER
+{:  
+compilador.setError("Error sintactico <"+id.lexema+">: Sentencia SALIDA hace falta SEGUNDO parametro: renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+:}
+| SALIDA PAREIZQ COMA p_salida:p PAREDER
+{:  
+compilador.setError("Error sintactico: Sentencia SALIDA hace falta PRIMER parametro: renglon: "+(pleft+1)+" columna: "+(pright+1)+"");
+:} 
+| SALIDA:n PAREIZQ COMA PAREDER
+{:  
+compilador.setError("Error sintactico: Sentencia SALIDA hace falta PRIMERO Y SEGUNDO parametro: renglon: "+(nleft+1)+" columna: "+(nright+1)+"");
+:}
+| SALIDA:n ID:id COMA p_salida:p PAREDER
+{:  
+compilador.setError("Error sintactico: Sentencia SALIDA hace falta un PARENTESIS de apertura '(': renglon: "+(nleft+1)+" columna: "+(nright+1)+"");
+:} 
+| SALIDA PAREIZQ ID ID:id COMA p_salida:p PAREDER
+{:  
+compilador.setError("Error sintactico: No corresponde a la sentencia SALIDA: renglon: "+(idleft+1)+" columna: "+(idright+1)+"");
+:}
+;
 
 
 

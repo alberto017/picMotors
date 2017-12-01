@@ -24,7 +24,7 @@ bucle {
 	ed(vboton){
 	ledRojop = falso
 	ledVerde = falso
-	salida(ledRojop, )
+	salida( ,)
 	salida(ledVerde,verde)
 	ledAmarillo = verdadero
 	salida(ledAmarillo,amarillo)

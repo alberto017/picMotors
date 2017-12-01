@@ -1004,15 +1004,15 @@ class Lexer implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return token(sym.ERROR);
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.ERROR);
             }
           case 64: break;
           case 2: 
-            { return token(sym.ID,"ID");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.ID,"ID");
             }
           case 65: break;
           case 3: 
-            { return token(sym.INTEGERNUM,"INTEGERNUM");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.INTEGERNUM,"INTEGERNUM");
             }
           case 66: break;
           case 4: 
@@ -1020,79 +1020,79 @@ class Lexer implements java_cup.runtime.Scanner {
             }
           case 67: break;
           case 5: 
-            { return token(sym.DIVISION,"DIVISION");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.DIVISION,"DIVISION");
             }
           case 68: break;
           case 6: 
-            { return token(sym.OR,"OR");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.OR,"OR");
             }
           case 69: break;
           case 7: 
-            { return token(sym.TIEMPO,"TIEMPO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.TIEMPO,"TIEMPO");
             }
           case 70: break;
           case 8: 
-            { return token(sym.GATO,"GATO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.GATO,"GATO");
             }
           case 71: break;
           case 9: 
-            { return token(sym.LLAVEDER,"LLAVEDER");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.LLAVEDER,"LLAVEDER");
             }
           case 72: break;
           case 10: 
-            { return token(sym.LLAVEIZQ,"LLAVEIZQ");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.LLAVEIZQ,"LLAVEIZQ");
             }
           case 73: break;
           case 11: 
-            { return token(sym.PAREIZQ,"PAREIZQ");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PAREIZQ,"PAREIZQ");
             }
           case 74: break;
           case 12: 
-            { return token(sym.PAREDER,"PAREDER");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PAREDER,"PAREDER");
             }
           case 75: break;
           case 13: 
-            { return token(sym.PUNTOYCOMA,"PUNTOYCOMA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PUNTOYCOMA,"PUNTOYCOMA");
             }
           case 76: break;
           case 14: 
-            { return token(sym.PUNTO,"PUNTO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PUNTO,"PUNTO");
             }
           case 77: break;
           case 15: 
-            { return token(sym.MAYORQUE,"MAYORQUE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MAYORQUE,"MAYORQUE");
             }
           case 78: break;
           case 16: 
-            { return token(sym.IGUAL,"IGUAL");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.IGUAL,"IGUAL");
             }
           case 79: break;
           case 17: 
-            { return token(sym.AND,"AND");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.AND,"AND");
             }
           case 80: break;
           case 18: 
-            { return token(sym.MENORQUE,"MENORQUE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MENORQUE,"MENORQUE");
             }
           case 81: break;
           case 19: 
-            { return token(sym.COMA,"COMA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.COMA,"COMA");
             }
           case 82: break;
           case 20: 
-            { return token(sym.DOSPUNTOS,"DOSPUNTOS");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.DOSPUNTOS,"DOSPUNTOS");
             }
           case 83: break;
           case 21: 
-            { return token(sym.SUMA,"SUMA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.SUMA,"SUMA");
             }
           case 84: break;
           case 22: 
-            { return token(sym.MULTIPLICACION,"MULTIPLICACION");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MULTIPLICACION,"MULTIPLICACION");
             }
           case 85: break;
           case 23: 
-            { return token(sym.RESTA,"RESTA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.RESTA,"RESTA");
             }
           case 86: break;
           case 24: 
@@ -1100,159 +1100,159 @@ class Lexer implements java_cup.runtime.Scanner {
             }
           case 87: break;
           case 25: 
-            { return token(sym.O,"O");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.O,"O");
             }
           case 88: break;
           case 26: 
-            { return token(sym.NOT,"NOT");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.NOT,"NOT");
             }
           case 89: break;
           case 27: 
-            { return token(sym.ED,"ED");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.ED,"ED");
             }
           case 90: break;
           case 28: 
-            { return token(sym.EF,"EF");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.EF,"EF");
             }
           case 91: break;
           case 29: 
-            { return token(sym.MAYORIGUALQUE,"MAYORIGUALQUE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MAYORIGUALQUE,"MAYORIGUALQUE");
             }
           case 92: break;
           case 30: 
-            { return token(sym.COMPARA,"COMPARA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.COMPARA,"COMPARA");
             }
           case 93: break;
           case 31: 
-            { return token(sym.DISTINTODE,"DISTINTODE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.DISTINTODE,"DISTINTODE");
             }
           case 94: break;
           case 32: 
-            { return token(sym.MENORIGUALQUE,"MENORIGUALQUE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MENORIGUALQUE,"MENORIGUALQUE");
             }
           case 95: break;
           case 33: 
-            { return token(sym.CADENA,"CADENA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.CADENA,"CADENA");
             }
           case 96: break;
           case 34: 
-            { return token(sym.Y,"Y");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.Y,"Y");
             }
           case 97: break;
           case 35: 
-            { return token(sym.SAR,"SAR");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.SAR,"SAR");
             }
           case 98: break;
           case 36: 
-            { return token(sym.MODULO,"MODULO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MODULO,"MODULO");
             }
           case 99: break;
           case 37: 
-            { return token(sym.CAR,"CAR");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.CAR,"CAR");
             }
           case 100: break;
           case 38: 
-            { return token(sym.ALTO,"ALTO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.ALTO,"ALTO");
             }
           case 101: break;
           case 39: 
-            { return token(sym.PSALIDA,"PSALIDA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PSALIDA,"PSALIDA");
             }
           case 102: break;
           case 40: 
-            { return token(sym.PENTRADA,"PENTRADA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PENTRADA,"PENTRADA");
             }
           case 103: break;
           case 41: 
-            { return token(sym.SERVO,"SERVO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.SERVO,"SERVO");
             }
           case 104: break;
           case 42: 
-            { return token(sym.CICLO,"CICLO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.CICLO,"CICLO");
             }
           case 105: break;
           case 43: 
-            { return token(sym.FALSO,"FALSO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.FALSO,"FALSO");
             }
           case 106: break;
           case 44: 
-            { return token(sym.FINAL,"FINAL");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.FINAL,"FINAL");
             }
           case 107: break;
           case 45: 
-            { return token(sym.BUCLE,"BUCLE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.BUCLE,"BUCLE");
             }
           case 108: break;
           case 46: 
-            { return token(sym.UNTIL,"UNTIL");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.UNTIL,"UNTIL");
             }
           case 109: break;
           case 47: 
-            { return token(sym.DO,"DO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.DO,"DO");
             }
           case 110: break;
           case 48: 
-            { return token(sym.SALIDA,"SALIDA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.SALIDA,"SALIDA");
             }
           case 111: break;
           case 49: 
-            { return token(sym.INICIO,"INICIO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.INICIO,"INICIO");
             }
           case 112: break;
           case 50: 
-            { return token(sym.DETENER,"DETENER");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.DETENER,"DETENER");
             }
           case 113: break;
           case 51: 
-            { return token(sym.DECLARA,"DECLARA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.DECLARA,"DECLARA");
             }
           case 114: break;
           case 52: 
-            { return token(sym.RETARDO,"RETARDO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.RETARDO,"RETARDO");
             }
           case 115: break;
           case 53: 
-            { return token(sym.REPEAT,"REPEAT");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.REPEAT,"REPEAT");
             }
           case 116: break;
           case 54: 
-            { return token (sym.ENTRADA, "ENTRADA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token (sym.ENTRADA, "ENTRADA");
             }
           case 117: break;
           case 55: 
-            { return token(sym.BOLEANO,"BOLEANO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.BOLEANO,"BOLEANO");
             }
           case 118: break;
           case 56: 
-            { return token(sym.WHILE,"WHILE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.WHILE,"WHILE");
             }
           case 119: break;
           case 57: 
-            { return token(sym.CARACTER,"CARACTER");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.CARACTER,"CARACTER");
             }
           case 120: break;
           case 58: 
-            { return token(sym.CONTADOR,"CONTADOR");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.CONTADOR,"CONTADOR");
             }
           case 121: break;
           case 59: 
-            { return token(sym.VARIABLE,"VARIABLE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.VARIABLE,"VARIABLE");
             }
           case 122: break;
           case 60: 
-            { return token(sym.PROGRAMA,"PROGRAMA");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PROGRAMA,"PROGRAMA");
             }
           case 123: break;
           case 61: 
-            { return token(sym.VERDADERO,"VERDADERO");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.VERDADERO,"VERDADERO");
             }
           case 124: break;
           case 62: 
-            { return token(sym.MOTORELECT,"MOTORELECT");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.MOTORELECT,"MOTORELECT");
             }
           case 125: break;
           case 63: 
-            { return token(sym.PROCEDURE,"PROCEDURE");
+            { compilador.setTablaLexema("<Palabra reservada, "+yytext()+" >"+"\n");return token(sym.PROCEDURE,"PROCEDURE");
             }
           case 126: break;
           default:
